@@ -23,6 +23,8 @@ class Calculator < ApplicationRecord
       raise "negative numbers not allowed #{negative_num.join(",")}"
     end
 
+    num_arr.reject! { |num| num > 1000 }
+
     num_arr.sum
   end
 
