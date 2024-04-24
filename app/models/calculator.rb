@@ -23,6 +23,7 @@ class Calculator < ApplicationRecord
       raise "negative numbers not allowed #{negative_num.join(",")}"
     end
 
+    # 6th Question
     num_arr.reject! { |num| num > 1000 }
 
     num_arr.sum
@@ -43,4 +44,7 @@ class Calculator < ApplicationRecord
 
   #5th Question
   # Calculator.add("-1,1,-8")    o/p: RuntimeError (negative numbers not allowed -1,-8)
+
+  #6th Question
+  # Calculator.add("2,1002")   o/p: 2
 end
