@@ -16,7 +16,14 @@ class Calculator < ApplicationRecord
       num = num.split("\n", 2)[1]
     end
 
-    num.split(/[\n#{delimiter}]/).map(&:to_i).sum
+    num_arr = num.split(/[\n#{delimiter}]/).map(&:to_i)
+    negative_num = num_arr.select { |n| n < 0 }
+
+    if negative_num.any?
+      raise "negative numbers not allowed #{negative_num.join(",")}"
+    end
+
+    num_arr.sum
   end
 
   # 2nd Question
@@ -31,4 +38,7 @@ class Calculator < ApplicationRecord
 
   # 4th Question
   # Calculator.add("//;\n1;2")    o/p: 3
+
+  #5th Question
+  # Calculator.add("-1,1,-8")    o/p: RuntimeError (negative numbers not allowed -1,-8)
 end
