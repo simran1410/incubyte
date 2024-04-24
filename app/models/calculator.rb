@@ -12,11 +12,18 @@ class Calculator < ApplicationRecord
     # 4th Question
     delimiter = ","
     if num.start_with?("//")
-      delimiter = num[2]
+      # delimiter = num[2]
+      delimiters = num.match(/\/\/\[(.+?)\]\n/)
+      delimiter = delimiters[1] if delimiters
       num = num.split("\n", 2)[1]
     end
 
-    num_arr = num.split(/[\n#{delimiter}]/).map(&:to_i)
+    # num_arr = num.split(/[\n#{delimiter}]/).map(&:to_i)
+
+    # 7th Question
+    num_arr = num.split(/[\n#{Regexp.escape(delimiter)}]/).map(&:to_i)
+
+    # 5th Question
     negative_num = num_arr.select { |n| n < 0 }
 
     if negative_num.any?
@@ -47,4 +54,7 @@ class Calculator < ApplicationRecord
 
   #6th Question
   # Calculator.add("2,1002")   o/p: 2
+
+  # 7th Question
+  # Calculator.add("//[***]\n1***2***3")  o/p: 6
 end
